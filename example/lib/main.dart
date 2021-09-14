@@ -1,8 +1,11 @@
 import 'package:csc_picker/csc_picker.dart';
+import 'package:country_codes/country_codes.dart';
 import 'package:flutter/material.dart';
 
 /// This is a implementation of the Country State City Picker.
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CountryCodes.init();
   runApp(MyApp());
 }
 
@@ -36,8 +39,27 @@ class _MyHomePageState extends State<MyHomePage> {
   String cityValue = "";
   String address = "";
 
+  setDefaultcountry() {
+    CountryDetails details = CountryCodes.detailsForLocale();
+    var localCountryName = details.name.replaceAll(' ', '_');
+    print("LocaleCountry value is: $localCountryName");
+    var _defaultCountry;
+    DefaultCountry.values.forEach((nodeCountry) {
+      var _nodeCountry =
+          nodeCountry.toString().replaceAll('DefaultCountry.', '');
+      print("nodeCountry is: $_nodeCountry");
+      if (_nodeCountry == localCountryName) {
+        _defaultCountry = nodeCountry;
+      }
+    });
+    return _defaultCountry;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var name = setDefaultcountry();
+    print("Default country is: $name");
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -54,7 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   showStates: true,
 
                   /// Enable disable city drop down [OPTIONAL PARAMETER]
-                  showCities: true,
+                  showCities: false,
+
+                  layout: Layout.vertical,
 
                   ///Enable (get flag with country name) / Disable (Disable flag) / ShowInDropdownOnly (display flag in dropdown only) [OPTIONAL PARAMETER]
                   flagState: CountryFlag.DISABLE,
@@ -74,7 +98,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           Border.all(color: Colors.grey.shade300, width: 1)),
 
                   ///Default Country
-                  defaultCountry: DefaultCountry.India,
+                  defaultCountry: name,
+
+                  /// selected item padding [OPTIONAL PARAMETER]
+                  selectedItemPadding:
+                      EdgeInsets.symmetric(horizontal: 8, vertical: 20),
 
                   ///selected item style [OPTIONAL PARAMETER]
                   selectedItemStyle: TextStyle(
