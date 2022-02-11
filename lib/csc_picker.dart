@@ -521,7 +521,9 @@ class CSCPicker extends StatefulWidget {
     this.onStateChanged,
     this.onCityChanged,
     this.labelName,
-    this.isAsterisk,
+    this.isAsteriskCountry = true,
+    this.isAsteriskState = false,
+    this.isAsteriskCity = false,
     this.selectedItemPadding,
     this.selectedItemStyle,
     this.dropdownHeadingStyle,
@@ -560,7 +562,9 @@ class CSCPicker extends StatefulWidget {
 
   ///Parameter floating picker label
   final String? labelName;
-  final bool? isAsterisk;
+  final bool isAsteriskCountry;
+  final bool isAsteriskState;
+  final bool isAsteriskCity;
 
   final DefaultCountry? defaultCountry;
 
@@ -798,18 +802,18 @@ class _CSCPickerState extends State<CSCPicker> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  textFieldlabelName('Country', true),
+                  textFieldlabelName('Country', widget.isAsteriskCountry),
                   countryDropdown(),
                   SizedBox(
                     height: 10.0,
                   ),
-                  textFieldlabelName('State', false),
+                  textFieldlabelName('State', widget.isAsteriskState),
                   stateDropdown(),
                   SizedBox(
                     height: 10.0,
                   ),
                   widget.showCities
-                      ? textFieldlabelName('City/Town', false)
+                      ? textFieldlabelName('City/Town', widget.isAsteriskCity)
                       : Container(),
                   widget.showCities ? cityDropdown() : Container(),
                 ],

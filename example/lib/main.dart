@@ -72,6 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 ///Adding CSC Picker Widget in app
                 CSCPicker(
+                  ///Turn on or Off Asterisk against Labels
+                  isAsteriskCountry: false,
+
                   ///Enable disable state dropdown [OPTIONAL PARAMETER]
                   showStates: true,
 
