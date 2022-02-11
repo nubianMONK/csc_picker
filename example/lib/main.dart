@@ -59,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var name = setDefaultcountry();
     print("Default country is: $name");
+    GlobalKey<CSCPickerState> _cscPickerKey = GlobalKey();
 
     return Scaffold(
       appBar: AppBar(
@@ -100,12 +101,26 @@ class _MyHomePageState extends State<MyHomePage> {
                       border:
                           Border.all(color: Colors.grey.shade300, width: 1)),
 
+                  ///placeholders for dropdown search field
+                  countrySearchPlaceholder: "Country",
+                  stateSearchPlaceholder: "State",
+                  citySearchPlaceholder: "City",
+
+                  ///labels for dropdown
+                  countryDropdownLabel: "*Country",
+                  stateDropdownLabel: "*State",
+                  cityDropdownLabel: "*City",
+
                   ///Default Country
                   defaultCountry: name,
 
                   /// selected item padding [OPTIONAL PARAMETER]
                   selectedItemPadding:
                       EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+                  //defaultCountry: DefaultCountry.India,
+
+                  ///Disable country dropdown (Note: use it with default country)
+                  //disableCountry: true,
 
                   ///selected item style [OPTIONAL PARAMETER]
                   selectedItemStyle: TextStyle(

@@ -13,6 +13,7 @@ class DropdownWithSearch<T> extends StatelessWidget {
   final double? searchBarRadius;
   final double? dialogRadius;
   final bool disabled;
+  final String label;
 
   final Function onChanged;
 
@@ -31,6 +32,7 @@ class DropdownWithSearch<T> extends StatelessWidget {
       this.disabledDecoration,
       this.searchBarRadius,
       this.dialogRadius,
+      required this.label,
       this.disabled = false})
       : super(key: key);
 
